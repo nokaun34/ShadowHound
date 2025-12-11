@@ -34,8 +34,6 @@ function ShadowHound-DS() {
         return
     }
 
-    Print-Logo
-
     Write-Output '[+] Executing with the following parameters:'
     if ($Server) { Write-Output "   - Server: $Server" }
     Write-Output "   - OutputFile: $OutputFile"
@@ -395,7 +393,6 @@ $objectClassMapping = @{
 }
 
 function Print-Help {
-    Print-Logo
     $helpMessage = '
 ShadowHound-DS Help
 
@@ -450,17 +447,4 @@ ShadowHound-DS -OutputFile "C:\Results\ldap_output.txt" -Credential $cred
 }
 
 
-function Print-Logo {
-    $logo = @'
-·········································································
-:  ____  _               _               _   _                       _  :
-: / ___|| |__   __ _  __| | _____      _| | | | ___  _   _ _ __   __| | :
-: \___ \| '_ \ / _` |/ _` |/ _ \ \ /\ / / |_| |/ _ \| | | | '_ \ / _` | :
-:  ___) | | | | (_| | (_| | (_) \ V  V /|  _  | (_) | |_| | | | | (_| | :
-: |____/|_| |_|\__,_|\__,_|\___/ \_/\_/ |_| |_|\___/ \__,_|_| |_|\__,_| :
-:                                                                       :
-:   Author: Yehuda Smirnov (X: @yudasm_ BlueSky: @yudasm.bsky.social)   :
-·········································································
-'@
-    Write-Output $logo
-}
+
