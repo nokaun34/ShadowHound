@@ -1,4 +1,4 @@
-function ShadowHound-DS() {
+function ithelp() {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false, HelpMessage = 'The domain controller to query.')]
@@ -25,7 +25,6 @@ function ShadowHound-DS() {
     )
 
     if ($Help) {
-        Print-Help
         return
     }
 
@@ -163,7 +162,7 @@ function ShadowHound-DS() {
         $searcher.Filter = '(objectGuid=*)'
     }
 
-    $searcher.PageSize = 1000
+    $searcher.PageSize = 500
 
     $silenceofthezero = $searcher.PropertiesToLoad.Add('*')
     $searcher.SecurityMasks = 'Dacl,Group,Owner'
@@ -392,59 +391,7 @@ $objectClassMapping = @{
     'msPKI-Enterprise-Oid'                 = 'top, msPKI-Enterprise-Oid'
 }
 
-function Print-Help {
-    $helpMessage = '
-ShadowHound-DS Help
 
-SYNTAX:
-ShadowHound-DS [-Server <string>] -OutputFile <string> [-LdapFilter <string>] [-SearchBase <string>] [-Credential <pscredential>] [-Certificates] [-Help]
-
-PARAMETERS:
--Help
-    Display this help information.
-
--Server <string> [Optional]
-    The domain controller to query. If not specified, the default DC is used.
-
--OutputFile <string> [Required]
-    The path to the output file where results will be saved.
-
--LdapFilter <string> [Optional]
-    LDAP filter to customize the search.
-    Defaults to (objectGuid=*).
-
--SearchBase <string> [Optional]
-    The base DN for the search.
-
--Credential <pscredential> [Optional]
-    PSCredential object for alternate credentials.
-
--Certificates [Optional]
-    Enumerate certificate-related objects.
-
-EXAMPLES:
-# Example 1: Basic usage with required parameter
-ShadowHound-DS -OutputFile "C:\Results\ldap_output.txt"
-
-# Example 2: Specify a domain controller
-ShadowHound-DS -Server "dc.domain.local" -OutputFile "C:\Results\ldap_output.txt"
-
-# Example 3: Use a custom LDAP filter
-ShadowHound-DS -OutputFile "C:\Results\ldap_output.txt" -LdapFilter "(objectClass=computer)"
-
-# Example 4: Specify a search base
-ShadowHound-DS -OutputFile "C:\Results\ldap_output.txt" -SearchBase "DC=domain,DC=local"
-
-# Example 5: Enumerate certificate-related objects
-ShadowHound-DS -OutputFile "C:\Results\cert_output.txt" -Certificates
-
-# Example 6: Use alternate credentials
-$cred = Get-Credential
-ShadowHound-DS -OutputFile "C:\Results\ldap_output.txt" -Credential $cred
-'
-    Write-Output $helpMessage
-    return
-}
 
 
 
